@@ -1,0 +1,14 @@
+name: Call a reusable workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  call-workflow-passing-data:
+  	name: caller
+    uses: ./.github/workflows/called.yml
+    with:
+      username: ooocha
+    secrets: inherit
