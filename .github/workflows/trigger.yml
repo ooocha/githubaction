@@ -1,5 +1,7 @@
 name: Trigger
 on:
+  pull_request:
+    branches: [ master ]
   issue_comment:                                     
     types: [created, edited]
 jobs:
