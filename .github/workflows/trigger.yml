@@ -1,15 +1,25 @@
 name: Trigger
+
 on:
   pull_request:
-    branches: [ master ]
-  issue_comment:                                     
-    types: [created, edited]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+
 jobs:
-  job01:
-    if: contains(github.event.comment.body, '/build/')    # check if the comments come from pull request, exclude those from issue.
-    runs-on: [ubuntu-latest]
+  rocket:
+    ## Just to react to valid comment with rocket
+    runs-on: ubuntu-latest
+    if: ${{ github.event.comment &&
+          github.event.issue.pull_request &&
+          startsWith(github.event.comment.body, '/buildme') }}
     steps:
-      - name: say hello
+      -
+        name: Reaction
         run: |
-          echo 'triggered'
-          exit 0
+          # send reaction to comment to show build was triggered
+          curl ${{github.event.comment.url}}/reactions \
+            -X POST \
+            -d '{"content":"rocket"}' \
+            -H "Accept: application/vnd.github.squirrel-girl-preview+json" \
+            -H "Authorization: token ${{github.token}}"
