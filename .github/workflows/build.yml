@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:  
-
-    runs-on: macos-latest  // iOS 플랫폼에서 실행한다는 뜻
-
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
     - name: Build Xcode
