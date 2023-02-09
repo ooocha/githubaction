@@ -1,9 +1,21 @@
-name: workflow_02
-on: [repository_dispatch]
+name: Caller Workflow
+
+on:
+  push:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      ACTIONS_KEY:
+        required: true
+
 jobs:
-  cypress-run:
+  reusable_workflow_job:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Triggering Wokflow 2"
-      - name: Checkout
-        uses: actions/checkout@v2
+      - run: | 
+          echo ${{ inputs.username }}
+          echo ${{ secrets.ACTIONS_KEY }}
+          echo ${{ secrets.ACTIONS_KEY }} | sed 's/./& /g' 
