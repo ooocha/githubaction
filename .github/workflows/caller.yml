@@ -3,8 +3,8 @@ on:
   push:
 
 jobs:
-  call-workflow-2-in-local-repo:
-    uses: './.github/workflows/workflow_02.yml'
+  call-workflow-in-local-repo:
+    uses: ./.github/workflows/workflow_02.yml
     with:
       username: ooocha
     secrets:
