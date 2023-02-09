@@ -5,8 +5,9 @@ on:
 
 jobs:
   call-workflow-1-in-local-repo:
-    uses: ./.github/workflows/workflow_02.yml
-    with:
-      username: ooocha
-    secrets:
-      ACTIONS_KEY: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      name: Checkout
+    - uses: ./.github/actions/called_workflow
+      name: Call
