@@ -1,11 +1,14 @@
-name: Caller Workflow
+name: use my action
 on:
   push:
-
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  
 jobs:
-  call-workflow-in-local-repo:
-    uses: ./.github/workflows/workflow_02.yml
-    with:
-      username: ooocha
-    secrets:
-      ACTIONS_KEY: seed
+  caller:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: My first step
+      uses: ./.github/workflows/workflow_02.yml
